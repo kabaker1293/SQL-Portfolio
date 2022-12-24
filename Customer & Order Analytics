@@ -39,7 +39,7 @@ GROUP BY Product;
 
 SELECT Product, Quantity, Quantity*price AS Revenue 
 FROM FebSales
-WHERE location ='548 Lincoln St, Seattle, WA 98101'
+WHERE location ='548 Lincoln St, Seattle, WA 98101';
 
 -- 7.	How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
 
