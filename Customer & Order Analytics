@@ -1,0 +1,54 @@
+-- 1.	How many orders were placed in January? (Dataset has not been cleaned)
+
+Select COUNT (*) AS TotalOrders
+FROM JanSales
+WHERE orderID != ' ' 
+AND orderID != 'Order ID';
+
+-- 2.	How many of those orders were for an iPhone?
+
+Select COUNT (*) AS TotalOrders
+FROM JanSales
+WHERE orderID != ' '
+AND orderID != 'Order ID'
+AND product = 'iPhone';
+
+-- 3.	Select the customer account numbers for all the orders that were placed in February.
+
+SELECT DISTINCT acctnum
+FROM customers c
+INNER JOIN FebSales fs
+ON fs.orderID = c.order_id
+WHERE order_id != ‘ ‘
+AND order_id != ‘Order ID’;
+
+-- 4.	Which product was the cheapest one sold in January, and what was the price?
+
+SELECT Product, price
+FROM JanSales
+ORDER BY price ASC
+LIMIT 1;
+
+--5.	What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
+
+SELECT Product, SUM(Quantity)*price AS JanRev
+FROM JanSales
+GROUP BY Product;
+
+-- 6.	Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+
+SELECT Product, Quantity, Quantity*price AS Revenue 
+FROM FebSales
+WHERE location ='548 Lincoln St, Seattle, WA 98101'
+
+-- 7.	How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+
+SELECT 
+COUNT(DISTINCT c.acctnum), 
+AVG(quantity*price)
+FROM BIT_DB.FebSales fs
+LEFT JOIN BIT_DB.customers c
+ON fs.orderid=c.order_id
+WHERE fs.Quantity>2
+AND order_id <> '' 
+AND order_id <> 'Order ID';
