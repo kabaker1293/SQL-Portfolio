@@ -52,3 +52,11 @@ ON fs.orderid=c.order_id
 WHERE fs.Quantity>2
 AND order_id <> '' 
 AND order_id <> 'Order ID';
+
+-- 8. List all the products sold in Los Angeles in February, and include how many of each were sold.
+
+SELECT Product, SUM(quantity)
+FROM FebSales 
+WHERE location like '%Los Angeles%'
+GROUP BY Product;
+
